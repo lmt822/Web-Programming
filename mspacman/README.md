@@ -5,7 +5,7 @@
  * Finished JS file
  */
 
- Disclaimer: May not work for some broswer
- ACK: comp20 website
- Hours: 2 hours+
+ ##Disclaimer: May not work for some broswer
+ ##ACK: comp20 website
+ ##Hours: 2 hours+
 
