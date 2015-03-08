@@ -8,6 +8,6 @@ function parse(){
 	xhr.send();
 	function myCallBackFunc(){
 		data = JSON.parse(xhr.responseText);
-		document.getElementById("messages").innerHTML = data[0].content;
+		document.getElementById("messages").innerHTML = <p>data[0].content data[0].username</p><p>data[1].content data[1].username</p>;
 	}
 }
