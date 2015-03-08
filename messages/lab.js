@@ -1,7 +1,7 @@
 // Mengtian Li
 // lab.js
 // for Json
-Function parse(){
+function parse(){
 	xhr = new XMLHttpRequest();
 	xhr.open("get", "data.json", true);
 	xhr.onreadystatechange = myCallBackFunc;
