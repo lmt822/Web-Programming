@@ -3,7 +3,7 @@
 // for Json
 function parse(){
 	xhr = new XMLHttpRequest();
-	xhr.open("get", "data.json", true);
+	xhr.open("get", "http://messagehub.herokuapp.com/messages.json", true);
 	xhr.onreadystatechange = myCallBackFunc;
 	xhr.send();
 	function myCallBackFunc(){
