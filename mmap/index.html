@@ -18,7 +18,7 @@
 			var infowindow = new google.maps.InfoWindow();
 
 			var myOptions = {
-						zoom: 8, // The larger the zoom number, the bigger the zoom
+						zoom: 17, // The larger the zoom number, the bigger the zoom
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
@@ -27,20 +27,20 @@
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				//getMyLocation();
+				getMyLocation();
 			}
 
-			/*function getMyLocation() {
+			function getMyLocation() {
 				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
 						renderMe();
-						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						/*request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
-						request.onreadystatechange = renderPeople;
+						request.onreadystatechange = renderPeople;*/
 					});
 				}
 				else {
@@ -54,7 +54,7 @@
 				// Update map and go there...
 				map.panTo(me);
 				// get my icon
-				var icon = new google.maps.MarkerImage("VB.png"
+				var icon = new google.maps.MarkerImage("VB.jpg"
 					, null, null, null, new google.map.Size
 						(100,90));
 				// Create a marker
@@ -72,7 +72,7 @@
 					infowindow.open(map, this);
 				});
 			}
-*/
+
 			/*function renderPeople(){
 				if(request.readyState == 4 && request.status == 200) {
 					var json = JSON.parse(request.responseText);
