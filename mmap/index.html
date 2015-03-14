@@ -37,11 +37,12 @@
 						myLng = position.coords.longitude;
 						console.log("Call before getMyLocation()"+myLng+myLat);
 						renderMe();
-						/*request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
-						request.onreadystatechange = renderPeople;*/
+						request.onreadystatechange = renderPeople;
+						console.log("After sending data");
 					});
 				}
 				else {
@@ -56,12 +57,13 @@
         				new google.maps.Size(100,90));
 				marker = new google.maps.Marker({
 					position: me,
+					title: "Here I am!",
 					icon: markerImage
 				});
 				marker.setMap(map);
 				google.maps.event.addListener(marker, 'click', function() {
 						infowindow.close();
-						infowindow.setContent("RobDennison");
+						infowindow.setContent("BobOwens");
 						infowindow.open(map, this);
 					});
 			}
