@@ -107,7 +107,7 @@
 				var R = 3959;
 				var dLat = getRad(lat2-lat1);  
 				var dLon = getRad(lng2-lng1);  
-				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(getRad(lat1) * Math.cos(getRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(getRad(lat1)) * Math.cos(getRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 				var d = R * c; 
 				return d;
