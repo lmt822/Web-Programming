@@ -35,14 +35,12 @@
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
-						console.log("Call before getMyLocation()"+myLng+myLat);
 						renderMe();
 						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
 						request.onreadystatechange = renderPeople;
-						console.log("After sending data");
 					});
 				}
 				else {
