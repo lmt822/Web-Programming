@@ -51,27 +51,21 @@
 			function renderMe()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
-				
-				// Update map and go there...
-				map.panTo(me);
-				// get my icon
-				var icon = "VB.jpg";/*new google.maps.MarkerImage("VB.jpg"
-					, null, null, null, new google.map.Size
-						(100,90));*/
-				// Create a marker
-				marker = new google.maps.Marker({
-					position: me,
-					icon = icon,
-					map:map
-				});
-				marker.setMap(map);
-					
-				// Open info window on click of marker
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.close();
-					infowindow.setContent("BobOwens");
-					infowindow.open(map, this);
-				});
+	// Update map and go there...
+	map.panTo(me);
+	// Create a marker
+	var markerImage = "VB.jpg";
+	marker = new google.maps.Marker({
+		position: me,
+		icon: markerImage
+	});
+	marker.setMap(map);
+	// Open info window on click of marker
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.close();
+		infowindow.setContent("RobDennison");
+		infowindow.open(map, this);
+	});
 			}
 
 			/*function renderPeople(){
