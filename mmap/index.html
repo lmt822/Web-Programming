@@ -27,7 +27,7 @@
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				getMyLocation();
+					getMyLocation();
 			}
 
 			function getMyLocation() {
@@ -35,19 +35,20 @@
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
-						renderMe();
-						/*request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						console.log("Call before getMyLocation()"+myLng+myLat);
+						/*renderMe();
+						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
-						request.onreadystatechange = renderPeople;*/
-					});
+						request.onreadystatechange = renderPeople;
+					});*/
 				}
 				else {
 					alert("Geolocation is not supported by your web browser.  What a shame!");
 				}
 			}
-			function renderMe()
+			/*function renderMe()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 				
