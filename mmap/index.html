@@ -27,10 +27,10 @@
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-					//getMyLocation();
+					getMyLocation();
 			}
 
-			/*function getMyLocation() {
+			function getMyLocation() {
 				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
@@ -41,7 +41,7 @@
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
-						request.onreadystatechange = renderPeople;
+						request.onreadystatechange = renderPeople;*/
 					});
 				}
 				else {
