@@ -90,7 +90,7 @@
 						position: me,
 						map: map
 					});
-            		var distance = get_distance(lat, lng, my_lat, my_lng).toFixed(4);
+            		var distance = get_distance(lat, lng, myLat, myLng).toFixed(4);
             		marker.content = "<h1>"+login+"</h1>"+ "<p>"+distance+" miles away </p>";
 
             		google.maps.event.addListener(marker, 'click', function(){   
