@@ -36,8 +36,8 @@
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
 						console.log("Call before getMyLocation()"+myLng+myLat);
-						/*renderMe();
-						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						renderMe();
+						/*request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
@@ -48,16 +48,16 @@
 					alert("Geolocation is not supported by your web browser.  What a shame!");
 				}
 			}
-			/*function renderMe()
+			function renderMe()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 				
 				// Update map and go there...
 				map.panTo(me);
 				// get my icon
-				var icon = new google.maps.MarkerImage("VB.jpg"
+				var icon = "VB.jpg";/*new google.maps.MarkerImage("VB.jpg"
 					, null, null, null, new google.map.Size
-						(100,90));
+						(100,90));*/
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
