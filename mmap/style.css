@@ -4,5 +4,15 @@
  * 3/13/2015
  */
 
-html { height: 100% }
-body { height: 10%; margin: 30px;}
+html { 
+	height: 100%; 
+}
+body { 
+	height: 80%; 
+	margin: 30px;
+	background-color: black: 
+}
+#map-canvas{
+	width: 90%;
+	height: 90%;
+}

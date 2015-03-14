@@ -6,105 +6,127 @@
 		<title>Astro's Master Map!!</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=places"></script>
-		
+		<link rel="stylesheet" href="style.css"/>
 		<script>
 			var myLat = 0;
 			var myLng = 0;
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
 			var myOptions = {
-						zoom: 13, // The larger the zoom number, the bigger the zoom
+						zoom: 20, // The larger the zoom number, the bigger the zoom
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
 			var map;
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
-			var places;
 			
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				console.log("Call before getMyLocation()");
 				getMyLocation();
-				console.log("Call after getMyLocation()");
 			}
-			
+
 			function getMyLocation() {
-				console.log("In getMyLocation()");
 				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
 					navigator.geolocation.getCurrentPosition(function(position) {
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
-						renderMap();
+						renderMe();
+						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
+						request.setRequestHeader("Content-length", data.length);
+						request.send(data);
+						request.onreadystatechange = renderPeople;
 					});
 				}
 				else {
 					alert("Geolocation is not supported by your web browser.  What a shame!");
 				}
-				console.log("Leaving getMyLocation()");
 			}
 
-			function renderMap()
+			function renderMe()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 				
 				// Update map and go there...
 				map.panTo(me);
-	
+				// get my icon
+				var icon = new google.maps.MarkerImage("VB.png"
+					, null, null, null, new google.map.Size
+						(100,90));
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
-					title: "Here I Am!"
+					title: "Here I Am!",
+					icon = icon
 				});
 				marker.setMap(map);
 					
 				// Open info window on click of marker
 				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(marker.title);
-					infowindow.open(map, marker);
-				});
-				
-				// Calling Google Places API
-				var request = {
-					location: me,
-					radius: '500',
-					types: ['food']
-				};
-				service = new google.maps.places.PlacesService(map);
-				service.search(request, callback);
-			}
-			
-			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
-			function callback(results, status)
-			{
-				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					alert("Got places back!");
-					places = results;
-					for (var i = 0; i < results.length; i++) {
-						createMarker(results[i]);
-					}
-				}
-			}
-			
-			function createMarker(place)
-			{
-				var placeLoc = place.geometry.location;
-				var marker = new google.maps.Marker({
-					map: map,
-					position: place.geometry.location
-				});
-
-				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.close();
-					infowindow.setContent(place.name);
+					infowindow.setContent("BobOwens");
 					infowindow.open(map, this);
 				});
-      }
+			}
+
+			function renderPeople(){
+				if(request.readyState == 4 && request.status == 200) {
+					var json = JSON.parse(request.responseText);
+					renderMap(json);
+				}
+		
+			}
+
+			function renderMap(json){
+				for (i = jsonRes.length - 1; i >= 0; i--) {
+        			if (jsonRes[i].login != "BobOwens")
+        			{       
+            			login = jsonRes[i].login;
+            			lat = jsonRes[i].lat;
+            			lng = jsonRes[i].lng;
+            
+            		me = new google.maps.LatLng(lat, lng)     
+            
+            		marker = new google.maps.Marker({
+						position: me,
+						map: map
+					});
+            		marker.setMap(map);
+            		var distance = get_distance(lat, lng, my_lat, my_lng);
+            		marker.content = "<h1>"+login+"</h1>"+ "<p>"+distance+" miles away </p>";
+
+            		google.maps.event.addListener(marker, 'click', function(){   
+            			Infowindow.close();   
+                		infowindow.setContent(this.content);
+                		infowindow.open(map, this);
+            		});
+        }
+    }
+			}
+			
+
+      		function get_distance (lat1, lng2, lat2, lng2) {
+				var R = 3959;
+				var dLat = getRad(lat2-lat1);  
+				var dLon = getRad(lng2-lng1);  
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.sin(dLon/2) * Math.sin(dLon/2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				var d = R * c; 
+				return d;
+			}
+
+			function getRad(deg) {
+				return deg * (Math.PI/180);
+			}
+
 		</script>
 	</head>
 	
 	<body onload="init()">
+		<h1>My Magic Map</h1>
 		<div id="map_canvas"></div>
 	</body>
 </html>
