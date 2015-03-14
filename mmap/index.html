@@ -39,7 +39,7 @@
 						renderMe();
 						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-						var data = "login=+BobOwens&lat="+myLat+"&lng="+myLng;
+						var data = "login=BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
 						request.onreadystatechange = renderPeople;
 						console.log("After sending data");
@@ -71,12 +71,12 @@
 			function renderPeople(){
 				if(request.readyState == 4 && request.status == 200) {
 					var json = JSON.parse(request.responseText);
-					//renderMap(json);
+					renderMap(json);
 				}
 		
 			}
 
-			/*function renderMap(json){
+			function renderMap(json){
 				for (i = jsonRes.length - 1; i >= 0; i--) {
         			if (jsonRes[i].login != "BobOwens")
         			{       
@@ -116,7 +116,7 @@
 			function getRad(deg) {
 				return deg * (Math.PI/180);
 			}
-		*/
+		
 		</script>
 	</head>
 	
