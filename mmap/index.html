@@ -94,7 +94,7 @@
             		marker.content = "<h1>"+login+"</h1>"+ "<p>"+distance+" miles away </p>";
 
             		google.maps.event.addListener(marker, 'click', function(){   
-            			Infowindow.close();   
+            			infowindow.close();   
                 		infowindow.setContent(this.content);
                 		infowindow.open(map, this);
             		});
