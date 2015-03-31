@@ -8,9 +8,6 @@
 	<script>
 	  // Most of your work will be done here...
 	$(document).ready(function(){
-    	/*for (key in localStorage) {
-    		$('#log').prepend('<p>' + key + ' - ' + localStorage[key] + '</p>');
-    	}*/
     	for (var i = 0; i < localStorage.length; i++){
     		$('#log').prepend('<p>' + localStorage.key(i) + ' - ' + localStorage.getItem(localStorage.key(i)) + '</p>');
 		}
@@ -25,6 +22,7 @@
  		var msg = $('#msg').val();
  		$('#log').prepend('<p>' + time + ' - ' + msg + '</p>');
  		localStorage[time] = msg;
+ 		$("#msg").val('');
  	}
 	</script>
 </head>
