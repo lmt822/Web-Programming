@@ -36,7 +36,7 @@
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
 						renderMe();
-						request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+						request.open("POST", "https://dry-inlet-5091.herokuapp.com/sendLocation", true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						var data = "login=BobOwens&lat="+myLat+"&lng="+myLng;
 						request.send(data);
