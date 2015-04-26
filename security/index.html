@@ -8,6 +8,31 @@
 </head>
 
 <body>
-	
+	<h1>Security assessment on Michael Seltzer's MMap</h1>
+	<p>prepared by <a href="http://lmt822.github.io"> Mengtian Li</a> &bull; 4/23/2015</p>
+	<h2>Introduction</h2>
+	<p>This assessment is to test the security of the MMap web application developed by Michael Seltzer for Comp20 assignment 4. MMap is a web application that records different users' locations by providing an API for other
+	users to submit and retrive these locations and display these information on their website. However, security issues in the application currently make it vulnerable for public use. This document identifies those vulnerabilities and suggests solutions for them.</p>
+	<p>My focus is on identifying and solving these security issues that can protect the web application from "attacks". Potential problems may come from invalid user inputs that crash the server, malicious scripts that destroy the database, cross sites injection that affects the website etc.</p>
+	<h2>Methodology</h2>
+	<p>At first, I tested the web application as a "black box" like testing a real world web application. By using <code>curl</code> and web browser, I started several attempts to "attack" the application. I found several vulnerabilities. Then I took the chance to look at Michael's code (server.js) and detect more potential errors.</p>
+	<h2>Abstract of Findings</h2>
+	<p>Most of the issues I identified are related to blindly trust user's input. The server basically has no validation algorithm for inputs before inserting these inputs to the database which can be jeopardized by malicious inputs. This site does not prevent code that attackers could send as user logins when they visit the website, which could result from crash the database, users' browser, functionality of the web application etc. These attacks can be prevented by proper validation of user inputs.</p>
+
+	<h2>Issues found</h2>
+	<ol>
+	<li>XSS script injection</li>
+	<ul>
+	<li>location: GET index</li>
+	<li>Severity is HIGH. Since scripts can be put as user input to the database, the index page will be affected by scripts that will change the content of the index page</li>
+	<li>XSS script injection is a common hacking method that hackers apply. Assuming there is no validation for user inputs in the server side, I tried a script that contains a link directs to my personal website. <code>curl--data "login=&ltscript&gtwindow.document.body.innerHTML='&ltstyle&gtbody{background-image:url("http://tinyurl.com/finglogo");background-size:25%;})&lt/style&gt';&lt/script&gt&amplat=11&amplng=22" http://nameless-ridge-5196.herokuapp.com/sendLocation</code></li>
+	<img src="img1.png" alt="XXS script injection" title="Change the content of the index page" height = "300" width = "400">
+	<li>This issue can be resolved by prechecking user input before inserting into database. If we see a script tag, we use the ascii table to replace all dangerous symbols. E.g. change &lt to "&amplt" </li>
+	</ul>
+	<li>
+	</ol>
+	-->
+	<h2>Conclusion</h2>
+	<p>Issues with MMap web application created by Michael Seltzer make it esay for both the server and clients to suffer from attacks. Following the suggestions above the application will significantly reduce the possibility of being hacked. However, more validation for input needed to be implemented to verify users' identities because for now, user can send any data information they desired. Such implementation may cost up to $1000. If you wish to continue polishing the website, please email lmt822@hotmail.com for more information.</p>
 </body>
 </html>
