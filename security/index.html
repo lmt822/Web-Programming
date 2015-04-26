@@ -29,9 +29,23 @@
 	<img src="img1.png" alt="XXS script injection" title="Change the content of the index page" height = "300" width = "400">
 	<li>This issue can be resolved by prechecking user input before inserting into database. If we see a script tag, we use the ascii table to replace all dangerous symbols. E.g. change &lt to "&amplt" </li>
 	</ul>
-	<li>
+	<li>No limits on input</li>
+	<ul>
+	<li>location: POST /sendLocation</li>
+	<li>Severity is MODERATE. Although the database is jeopardized with this issue, it will still take an extremely long input to make the database down.</li>
+	<li>Because there is no limitation on how long the inputs should be, some long inputs will populate the database and if the inputs are really long, the database will crash</li>
+	<img src="img2.png" alt="Extremely long input for login" title="Long input" height = "300" width = "400">
+	<li>This issue can be resolved by setting a limit on the input received from user. E.g. only take the first 100 characters of each input field and discard the remains. Although in some extreme case, 100 characters might not be enough but in the interest of security this limitation should be implemented.</li>
+	</ul>
+	<li>No validation on coordinates</li>
+	<ul>
+		<li>location: POST /sendLocation</li>
+		<li>Severity is LOW. Since this web application is not supposed to be a fully functional web application, validation on the correctness of geoloctaion is not very necessary but still need to be noticed.</li>
+		<li>As noticed in the server.js document, latitude and longitude are translated to float numbers directly. If the user sends invalid lat and lng (e.g. lat=1000 and lng=2000 which make no sense), the server will still store them in database and return them to clients.</li>
+		<img src="img3.png" alt="invalid lat and lng" title="invalid coords" height = "100" width = "400">
+		<li>This issue can be easily resolved by validating the coordinates within reasonable range.(From -180.00 to 180.00 for longitude and -90.00 to 90.00 for latitude)</li>
+	</ul>
 	</ol>
-	-->
 	<h2>Conclusion</h2>
 	<p>Issues with MMap web application created by Michael Seltzer make it esay for both the server and clients to suffer from attacks. Following the suggestions above the application will significantly reduce the possibility of being hacked. However, more validation for input needed to be implemented to verify users' identities because for now, user can send any data information they desired. Such implementation may cost up to $1000. If you wish to continue polishing the website, please email lmt822@hotmail.com for more information.</p>
 </body>
